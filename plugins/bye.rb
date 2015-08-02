@@ -20,6 +20,7 @@ module GitterBot
           REDIS.pipelined do
             card = %({"start":"#{working}","end":"#{message.sent}"})
             REDIS.rpush 'timecard:' + message.user.id, card
+            REDIS.del key
           end
         else
           msg = message.user.username + ': There are no valid working data'
