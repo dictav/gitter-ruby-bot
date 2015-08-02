@@ -11,7 +11,7 @@ $ bundle install
 ## Usage
 
 ```
-$ TOKEN=<token> ROOM_ID=<room_id> BOT_ID=<bot_id> ruby bot.rb
+$ TOKEN=<token> ROOM_ID=<room_id> BOT_ID=<bot_id> REDIS_URL=<redis_url> ruby bot.rb
 ```
 
 or use foreman
@@ -26,4 +26,5 @@ $ foreman start
 TOKEN=<token>
 ROOM_ID=<room_id>
 BOT_ID=<bot_id>
+REDIS_URL=<redis_url>
 ```
