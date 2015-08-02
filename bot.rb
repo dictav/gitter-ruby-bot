@@ -3,6 +3,7 @@ require 'em-http'
 require 'json'
 require 'redis'
 require 'logger'
+require 'net/https'
 
 require './helper.rb'
 Dir['./plugins/*.rb'].each { |file| require file }
