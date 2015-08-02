@@ -1,0 +1,4 @@
+.bundle
+.env
+ruby
+vendor
