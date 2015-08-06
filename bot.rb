@@ -20,6 +20,7 @@ BOT_ID   = ENV['BOT_ID']
 REDIS    = Redis.new(url: (ENV['REDIS_URL'] || 'redis://localhost:6379'))
 LOGGER   = Logger.new(ENV['LOG_FILE'] || STDOUT)
 STDOUT.sync = true
+LOGGER.level = Logger::INFO unless ENV['DEBUG']
 
 http = EM::HttpRequest.new(stream_url(ROOM_ID),
                            keepalive: true,
@@ -29,6 +30,7 @@ http = EM::HttpRequest.new(stream_url(ROOM_ID),
 EventMachine.run do
   req = http.get(head: authorized_header(TOKEN))
 
+  LOGGER.debug 'DEBUG mode'
   LOGGER.info 'Connect ' + ROOM_ID + ' with Bot ' + BOT_ID
   req.stream do |chunk|
     next if chunk.strip.empty?
