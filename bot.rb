@@ -18,7 +18,8 @@ TOKEN    = ENV['TOKEN']
 ROOM_ID  = ENV['ROOM_ID']
 BOT_ID   = ENV['BOT_ID']
 REDIS    = Redis.new(url: (ENV['REDIS_URL'] || 'redis://localhost:6379'))
-LOGGER   = Logger.new(ENV['LOG_FILE'] || STDERR)
+LOGGER   = Logger.new(ENV['LOG_FILE'] || STDOUT)
+STDOUT.sync = true
 
 http = EM::HttpRequest.new(stream_url(ROOM_ID),
                            keepalive: true,
