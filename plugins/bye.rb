@@ -32,10 +32,12 @@ module GitterBot
       private
 
       def self.build_message(name, s_date, e_date)
-        s_time = Date.parse(s_date).to_time
-        e_time = Date.parse(e_date).to_time
+        s_time = DateTime.parse(s_date).to_time
+        e_time = DateTime.parse(e_date).to_time
         hours = (e_time - s_time) / 3600
-        "#{name}: finished for #{hours} HOURS from #{s_date}"
+        LOGGER.debug([name, s_date, e_date, hours])
+
+        "#{name}: finished for #{hours.round(1)} HOURS from #{s_date}"
       end
     end
   end
