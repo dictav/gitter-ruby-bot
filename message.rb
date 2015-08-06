@@ -29,7 +29,7 @@ class Message
     @meta      = src['meta']
     @v         = src['v']
 
-    LOGGER.info(self)
+    LOGGER.debug(self)
   end
 
   def ===(other)

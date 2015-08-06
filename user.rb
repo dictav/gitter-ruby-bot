@@ -13,5 +13,7 @@ class User
     @url               = src['url']
     @avatar_url_small  = src['avatarUrlSmall']
     @avatar_url_medium = src['avatarUrlMedium']
+
+    LOGGER.debug(self)
   end
 end
