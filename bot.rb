@@ -22,13 +22,18 @@ LOGGER   = Logger.new(ENV['LOG_FILE'] || STDOUT)
 STDOUT.sync = true
 LOGGER.level = Logger::INFO unless ENV['DEBUG']
 
-http = EM::HttpRequest.new(stream_url(ROOM_ID),
-                           keepalive: true,
-                           connect_timeout: 0,
-                           inactivity_timeout: 0)
-
 EventMachine.run do
+  http = EM::HttpRequest.new(stream_url(ROOM_ID),
+                             keepalive: true,
+                             connect_timeout: 0,
+                             inactivity_timeout: 0)
+
   req = http.get(head: authorized_header(TOKEN))
+
+  req.errback do |err|
+    LOGGER.info error: err
+    EM.stop
+  end
 
   LOGGER.debug 'DEBUG mode'
   LOGGER.info 'Connect ' + ROOM_ID + ' with Bot ' + BOT_ID

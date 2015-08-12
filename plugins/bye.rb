@@ -26,6 +26,7 @@ module GitterBot
           msg = message.user.username + ': There are no valid working data'
         end
 
+        LOGGER.debug(msg)
         API.post(post_path(ROOM_ID), %({"text": "#{msg}"}), header)
       end
 
